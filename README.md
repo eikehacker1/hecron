@@ -18,4 +18,4 @@ or
 ````bash
 hecron hosts.txt 
 ````
-* VERIFY OUTPUT IN DIRECTORY: /out
+* VCHECK THE OUTPUT IN THE DIRECTORY: out
