@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// User-Agent global
+
 const userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36"
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 
 	filename := os.Args[1]
 
-	// Cria o diretório 'out' se ele não existir
+	
 	err := os.MkdirAll("out", os.ModePerm)
 	if err != nil {
 		fmt.Println("Erro ao criar o diretório 'out':", err)
@@ -61,7 +61,7 @@ func processURL(url string) {
 		return
 	}
 
-	// Defina o User-Agent global
+	
 	req.Header.Set("User-Agent", userAgent)
 
 	resp, err := client.Do(req)
@@ -71,17 +71,17 @@ func processURL(url string) {
 	}
 	defer resp.Body.Close()
 
-	// Lê o corpo da resposta
+	
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Printf("Erro ao ler o corpo da resposta para %s: %v\n", url, err)
 		return
 	}
 
-	// Cria um arquivo com a extensão .head no diretório 'out'
+	
 	filename := "out/" + strings.Replace(url, "://", ".", -1) + ".head"
 
-	// Crie uma string com o cabeçalho HTTP
+
 	headerString := "Status Code: " + resp.Status + "\n"
 	for key, values := range resp.Header {
 		for _, value := range values {
@@ -89,7 +89,7 @@ func processURL(url string) {
 		}
 	}
 
-	// Combine o cabeçalho com o corpo da resposta
+	
 	fileContent := headerString + "\n" + string(body)
 
 	err = ioutil.WriteFile(filename, []byte(fileContent), 0644)
